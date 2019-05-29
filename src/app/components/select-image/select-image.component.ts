@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { HttpClient, HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -25,7 +24,7 @@ export class SelectImageComponent implements OnInit {
     // used group in case we will want to add more inputs in the future
     this.myForm = this.fb.group({
       name: ['', Validators.required],
-      imgUrl: ['', Validators.required]
+      data: ['', Validators.required]
     });
   }
 
@@ -40,14 +39,13 @@ export class SelectImageComponent implements OnInit {
       this.imgUrl = '';
       return;
     }
-
     this.message = '';
     const reader = new FileReader();
     this.imagePath = files;
     this.imgData = files[0];
     reader.readAsDataURL(files[0]);
-    reader.onload = (event) => {
-      this.myForm.addControl('imageUrl', new FormControl());
+    reader.onload = () => {
+      this.myForm.addControl('data', new FormControl());
       this.imgUrl = JSON.parse(JSON.stringify(reader.result));
     };
   }
@@ -58,13 +56,10 @@ export class SelectImageComponent implements OnInit {
       data: this.imgData
     };
     this.modalRef.content.callback(imgObj);
-    this.modalRef.hide();
+    this.closeModal();
   }
 
-  hide() {
-    this.imgUrl = '';
-    this.myForm.reset();
-    this.imgData = new FileReader();
+  closeModal() {
     this.modalRef.hide();
   }
 }

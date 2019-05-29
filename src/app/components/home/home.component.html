@@ -2,6 +2,9 @@
   <div class="card">
     <div class="card-body">
       <h4>Welcome to Screenz Exam App</h4>
+      <p *ngIf="imgData.data">
+          Image name: {{ imgData.name }}
+        </p>
       <div class="mid-container">
         <div class="center-items" *ngIf="imgData.data">
           <img [alt]="imgData.name" [src]="imgData.data" />
