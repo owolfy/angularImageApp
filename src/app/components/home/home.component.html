@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h4>Welcome to Screenz Exam App</h4>
+      <div class="mid-container">
+        <div class="center-items" *ngIf="imgData.data">
+          <img [alt]="imgData.name" [src]="imgData.data" />
+        </div>
+        <div class="center-items with-margin">
+          <div class="btn btn-success" (click)="openModal()">
+            Upload Image
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="component-container">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Select Image</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="myForm" (ngSubmit)="submitHandler()">
+      <div class="row">
+        <div class="input-field col s12">
+          Image Name
+          <input type="text" placeholder="Type here..." formControlName="name" />
+        </div>
+      </div>
+      <span style="color:red;" *ngIf="message">{{ message }}</span>
+      <div class="mini-image-container">
+        <img [src]="imgUrl" class="img-size" *ngIf="imgUrl" /><br />
+      </div>
+      <input
+        #file
+        type="file"
+        accept="image/*"
+        formControlName="imgUrl"
+        (change)="handleFileInput(file.files)"
+      />
+      <div class="btn-container">
+        <span>
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!myForm.valid"
+          >
+            Save
+          </button>
+        </span>
+        <span>
+          <button
+          class="btn btn-success"
+          (click)="hide()"
+          >
+            Cancel
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

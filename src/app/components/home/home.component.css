@@ -1,0 +1,21 @@
+img {
+  height: 200px;
+  width: 200px;
+}
+.mid-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.center-items {
+  display: flex;
+  justify-content: center;
+}
+
+.center-items.with-margin {
+  margin-top: 4%;
+}
+.btn.btn-success {
+  width: 25%;
+
+}
