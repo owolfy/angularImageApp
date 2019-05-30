@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,10 +19,11 @@ import { SelectImageComponent } from './components/select-image/select-image.com
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    ImageCropperModule,
     ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [SelectImageComponent]
+  entryComponents: [SelectImageComponent],
 })
 export class AppModule { }

@@ -23,15 +23,25 @@
         </div>
       </div>
       <span style="color:red;" *ngIf="errMessage">{{ errMessage }}</span>
-      <div class="mini-image-container">
-        <img [src]="imgUrl" class="img-size" *ngIf="imgUrl" /><br />
+      <div class="mini-image-container" *ngIf="imgUrl">
+        <image-cropper
+          [imageChangedEvent]="imgUrl"
+          [maintainAspectRatio]="true"
+          [aspectRatio]="4 / 3"
+          [onlyScaleDown]="false"
+          [roundCropper]="false"
+          format="png"
+          (imageCropped)="imageCropped($event)"
+        ></image-cropper>
+        <br />
+        <img [src]="croppedImage" />
       </div>
       <input
         #file
         type="file"
         accept="image/*"
         formControlName="data"
-        (change)="handleFileInput(file.files)"
+        (change)="handleFileInput($event)"
       />
       <div class="btn-container">
         <span>

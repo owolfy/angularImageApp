@@ -24,12 +24,13 @@ export class HomeComponent implements OnInit {
       // this is how i get data back directly from SelectImageComponent
       initialState: {
         callback: (result) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(result.data);
-          reader.onload = () => {
-            this.imgData.data = reader.result;
-            this.imgData.name = result.name;
-          };
+          // console.log('xxxx', result);
+          // const reader = new FileReader();
+          // reader.readAsDataURL(result.data.base64);
+          // reader.onload = () => {
+          this.imgData.data = result.data;
+          this.imgData.name = result.name;
+          // };
         }
       }
     });
