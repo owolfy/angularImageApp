@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 
@@ -9,11 +9,10 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./select-image.component.css']
 })
 export class SelectImageComponent implements OnInit {
-  public imagePath;
   myForm: FormGroup;
-  imgUrl = '';  // this one is in order to show the image in the html
-  public message: string;
-  imgData = new FileReader();
+  imgUrl: any;  // local component: this one is in order to show the image in the html
+  imgData = new FileReader(); // this one will be passed to the parent
+  public errMessage: string;
 
   constructor(
     private fb: FormBuilder,
@@ -32,21 +31,25 @@ export class SelectImageComponent implements OnInit {
     if (files.length !== 1) {
       return;
     }
-
     const mimeType = files[0].type;
     if (mimeType.match(/image\/*/) == null) {
-      this.message = 'File format invalid. Must be of an image type.';
+      // if file type is invalid, the user wont be able to press save
+      this.myForm.get('data').setErrors({
+        required: true
+      });
+      this.errMessage = 'File format invalid. Must be of an image type.';
+      // edge case: user selected valid file (image), image is displayed. afterwards the user selected invalid file type.
+      // the following 2 lines are resetting the image data so it wont be displayed anymore
       this.imgUrl = '';
+      this.imgData = null;
       return;
     }
-    this.message = '';
+    this.errMessage = '';
     const reader = new FileReader();
-    this.imagePath = files;
     this.imgData = files[0];
     reader.readAsDataURL(files[0]);
     reader.onload = () => {
-      this.myForm.addControl('data', new FormControl());
-      this.imgUrl = JSON.parse(JSON.stringify(reader.result));
+      this.imgUrl = reader.result; // what the html file will show
     };
   }
 

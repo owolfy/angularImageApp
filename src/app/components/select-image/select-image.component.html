@@ -15,10 +15,14 @@
       <div class="row">
         <div class="input-field col s12">
           Image Name
-          <input type="text" placeholder="Type here..." formControlName="name" />
+          <input
+            type="text"
+            placeholder="Type here..."
+            formControlName="name"
+          />
         </div>
       </div>
-      <span style="color:red;" *ngIf="message">{{ message }}</span>
+      <span style="color:red;" *ngIf="errMessage">{{ errMessage }}</span>
       <div class="mini-image-container">
         <img [src]="imgUrl" class="img-size" *ngIf="imgUrl" /><br />
       </div>
@@ -40,11 +44,7 @@
           </button>
         </span>
         <span>
-          <button
-          class="btn btn-success"
-          type="reset"
-          (click)="closeModal()"
-          >
+          <button class="btn btn-success" type="reset" (click)="closeModal()">
             Cancel
           </button>
         </span>

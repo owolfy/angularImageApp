@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal'; // https://www.youtube.com/watch?v=Jm9q9Alva0M
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { SelectImageComponent } from '../select-image/select-image.component';
 
 @Component({
@@ -21,11 +21,12 @@ export class HomeComponent implements OnInit {
 
   openModal() {
     this.modalRef = this.modalService.show(SelectImageComponent, {
+      // this is how i get data back directly from SelectImageComponent
       initialState: {
         callback: (result) => {
           const reader = new FileReader();
           reader.readAsDataURL(result.data);
-          reader.onload = (event) => {
+          reader.onload = () => {
             this.imgData.data = reader.result;
             this.imgData.name = result.name;
           };
